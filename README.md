@@ -2,7 +2,7 @@
 
 # DAppNode package _teku_
 
-### Manteinance
+### Maintenance
 
 <!--Table with champion/s mantainers, versions and update status -->
 <!--UPDATED: :x: OR :heavy_check_mark: -->
