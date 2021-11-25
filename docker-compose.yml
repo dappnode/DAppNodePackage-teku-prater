@@ -3,6 +3,7 @@ services:
   teku-prater:
     build:
       context: ./build
+    user: root
     image: "teku-prater.teku-prater.dnp.dappnode.eth:0.1.0"
     volumes:
       - "teku-prater-data:/opt/teku/data"
