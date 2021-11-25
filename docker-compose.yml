@@ -4,6 +4,8 @@ services:
     build:
       context: ./build
     image: "teku-prater.teku-prater.dnp.dappnode.eth:0.1.0"
+    volumes:
+      - "teku-prater-data:/opt/teku/data"
     environment:
       HTTP_WEB3PROVIDER: "http://goerli-geth.dappnode:8545"
       HTTP_WEB3SIGNER: "http://web3signer.web3signer.dappnode:9003"
@@ -15,4 +17,4 @@ services:
       - "5051:5051"
     restart: unless-stopped
 volumes:
-  teku-prater: {}
+  teku-prater-data: {}
