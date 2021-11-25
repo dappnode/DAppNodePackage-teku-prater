@@ -1,4 +1,6 @@
-FROM consensys/teku:latest
+ARG UPSTREAM_VERSION
+
+FROM consensys/teku:$UPSTREAM_VERSION
 
 ENV JAVA_OPTS="-Xmx4g"
 
