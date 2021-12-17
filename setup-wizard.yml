@@ -25,15 +25,6 @@ fields:
     description: >-
       Web3sginer URL
     required: true
-  - id: VALIDATOR_PUBLIC_KEYS
-    target:
-      type: environment
-      name: VALIDATOR_PUBLIC_KEYS
-      service: teku-prater
-    title: Validator public keys
-    description: >-
-      Comma separated. E.g. publickey1,publickey2,publickey3
-    required: true
   - id: INITIAL_STATE
     target:
       type: environment

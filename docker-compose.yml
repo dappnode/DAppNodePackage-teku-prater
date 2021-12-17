@@ -12,7 +12,6 @@ services:
     environment:
       HTTP_WEB3PROVIDER: "http://goerli-geth.dappnode:8545"
       HTTP_WEB3SIGNER: "http://web3signer.web3signer.dappnode:9003"
-      VALIDATOR_PUBLIC_KEYS: ""
       INITIAL_STATE: ""
       EXTRA_OPTS: ""
     ports:
