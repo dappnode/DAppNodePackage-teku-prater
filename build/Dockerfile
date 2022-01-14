@@ -9,7 +9,7 @@ ENTRYPOINT [ "sh", "-c", "exec /opt/teku/bin/teku \
   --data-base-path=/opt/teku/data \
   --eth1-endpoint=\"$HTTP_WEB3PROVIDER\" \
   --validators-external-signer-url=\"$HTTP_WEB3SIGNER\" \
-  --validators-external-signer-public-keys=\"$VALIDATOR_PUBLIC_KEYS\" \
+  --validators-external-signer-public-keys=\"$HTTP_WEB3SIGNER\"/api/v1/eth2/publicKeys \
   --p2p-port=9000 \
   --rest-api-enabled=true \
   --rest-api-docs-enabled=true \
