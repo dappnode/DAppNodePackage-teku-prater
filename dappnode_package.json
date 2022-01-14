@@ -1,7 +1,7 @@
 {
   "name": "teku-prater.dnp.dappnode.eth",
   "version": "0.1.0",
-  "upstreamVersion": "21.11.1",
+  "upstreamVersion": "22.1.0",
   "architectures": ["linux/amd64"],
   "upstreamRepo": "ConsenSys/teku",
   "shortDescription": "teku-prater",
