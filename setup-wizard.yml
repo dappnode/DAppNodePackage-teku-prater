@@ -16,20 +16,12 @@ fields:
       - Nethermind `http://nethermind.public.dappnode:8545` - [Install link](http://my.dappnode/#/installer/nethermind.public.dappnode.eth)
       - Remote node (example URL) `https://remote-node-provider.io`
     required: true
-  - id: HTTP_WEB3SIGNER
-    target:
-      type: environment
-      name: HTTP_WEB3SIGNER
-      service: teku-prater
-    title: Web3sginer URL
-    description: >-
-      Web3sginer URL
-    required: true
   - id: INITIAL_STATE
     target:
       type: environment
       name: INITIAL_STATE
       service: teku-prater
     title: Initial State
+    required: false
     description: >-
       Sync faster. Format: [HTTPS_INFURA_ETH2_BEACON_PRATER]/eth/v1/debug/beacon/states/finalized
