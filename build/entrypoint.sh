@@ -6,8 +6,6 @@
 # 3. CUSTOM: create string with public keys comma separated
 # 4. Starts the validator
 
-HTTP_WEB3SIGNER="http://localhost:9003"
-
 ERROR="[ ERROR ]"
 INFO="[ INFO ]"
 
