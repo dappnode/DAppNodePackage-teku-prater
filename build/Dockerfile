@@ -1,18 +1,24 @@
 ARG UPSTREAM_VERSION
 
+###########
+# BUILDER #
+###########
+# Get jq binaries (curl is already in the consensys image)
+FROM debian:bullseye-slim as builder
+RUN apt update && apt install -y jq
+
+########
+# TEKU #
+########
+# IMPORTANT!: this docker image has a root user with password. Cannot execute apt update and apt install
 FROM consensys/teku:$UPSTREAM_VERSION
+
+COPY --from=builder /usr/bin/jq /usr/bin/jq
+COPY --from=builder /usr/lib/x86_64-linux-gnu/libjq* /usr/lib/x86_64-linux-gnu/
+COPY --from=builder /usr/lib/x86_64-linux-gnu/libonig* /usr/lib/x86_64-linux-gnu/
 
 ENV JAVA_OPTS="-Xmx4g"
 
-ENTRYPOINT [ "sh", "-c", "exec /opt/teku/bin/teku \
-  --network=prater \
-  --data-base-path=/opt/teku/data \
-  --eth1-endpoint=\"$HTTP_WEB3PROVIDER\" \
-  --validators-external-signer-url=\"$HTTP_WEB3SIGNER\" \
-  --validators-external-signer-public-keys=\"$HTTP_WEB3SIGNER\"/api/v1/eth2/publicKeys \
-  --p2p-port=9000 \
-  --rest-api-enabled=true \
-  --rest-api-docs-enabled=true \
-  --initial-state=\"$INITIAL_STATE\" \
-  --log-destination=CONSOLE \
-  $EXTRA_OPTS" ]
+COPY entrypoint.sh /usr/bin/entrypoint.sh
+
+ENTRYPOINT [ "entrypoint.sh" ]
