@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# This script does the following:
+#
 # 1. Fetches the public keys from the web3signer API
 # 2. Checks if the public keys are valid
 # 3. CUSTOM: create string with public keys comma separated
@@ -27,6 +26,7 @@ function get_public_keys() {
     --retry-max-time 40 \
     "${HTTP_WEB3SIGNER}/eth/v1/keystores"); then
         if PUBLIC_KEYS_PARSED=$(echo ${PUBLIC_KEYS} | jq -r '.data[].validating_pubkey' | tr ' ' ','); then
+            # convert array of strings to string comma separated to be used by the teku binary
             echo "${INFO} found public keys: $PUBLIC_KEYS_PARSED"
         else
             { echo "${ERROR} something wrong happened parsing the public keys"; exit 1; }
@@ -34,6 +34,16 @@ function get_public_keys() {
     else
         { echo "${ERROR} web3signer not available"; exit 1; }
     fi
+}
+
+# Writes public keys to file by new line separated
+# creates file if it does not exist
+function write_public_keys() {
+    rm -rf ${PUBLIC_KEYS_FILE}
+    echo "${INFO} writing public keys to file"
+    for key in ${PUBLIC_KEYS_PARSED}; do
+        echo "${key}" >> ${PUBLIC_KEYS_FILE}
+    done
 }
 
 ########
@@ -45,6 +55,12 @@ get_public_keys
 
 # Check public keys is not empty
 [ -z "${PUBLIC_KEYS_PARSED}" ] && { echo "${ERROR} no public keys found in API keymanager endpoint /eth/v1/keystores"; exit 1; }
+
+# Write public keys to file
+write_public_keys
+
+echo "${INFO} starting cronjob"
+cron
 
 echo "${INFO} starting teku"
 exec /opt/teku/bin/teku \
