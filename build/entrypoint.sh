@@ -4,9 +4,13 @@
 # 2. Checks if the public keys are valid
 # 3. CUSTOM: create string with public keys comma separated
 # 4. Starts the validator
+# IMPORTANT! the teku binary executes at the same time validator and beaconchain. The binary that starts the 
+# beaconchain must be executed in any case.
 
 ERROR="[ ERROR ]"
 INFO="[ INFO ]"
+
+WEB3SIGNER_AVAILABLE=true
 
 # Get public keys from API keymanager: bash array of strings
 # - Endpoint: http://web3signer.web3signer-prater.dappnode:9000/eth/v1/keystores
@@ -21,7 +25,7 @@ function get_public_keys() {
     if PUBLIC_KEYS=$(curl -s -X GET \
     -H "Content-Type: application/json" \
     --max-time 10 \
-    --retry 5 \
+    --retry 2 \
     --retry-delay 2 \
     --retry-max-time 40 \
     "${HTTP_WEB3SIGNER}/eth/v1/keystores"); then
@@ -32,7 +36,8 @@ function get_public_keys() {
             { echo "${ERROR} something wrong happened parsing the public keys"; exit 1; }
         fi
     else
-        { echo "${ERROR} web3signer not available"; exit 1; }
+        echo "${WARN} web3signer not available"
+        WEB3SIGNER_AVAILABLE=false
     fi
 }
 
@@ -62,7 +67,13 @@ write_public_keys
 echo "${INFO} starting cronjob"
 cron
 
-echo "${INFO} starting teku"
+if [ "${WEB3SIGNER_AVAILABLE}" = true ]; then
+    echo "${INFO} starting teku with validator and beaconchain"
+else
+    echo "${WARN} web3signer not available"
+    echo "${WARN} starting teku with validator only"
+fi
+
 exec /opt/teku/bin/teku \
   --network=prater \
   --data-base-path=/opt/teku/data \
