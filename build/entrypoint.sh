@@ -58,17 +58,15 @@ function write_public_keys() {
 # Get public keys from API keymanager
 get_public_keys
 
-# Check public keys is not empty
-[ -z "${PUBLIC_KEYS_PARSED}" ] && { echo "${ERROR} no public keys found in API keymanager endpoint /eth/v1/keystores"; exit 1; }
-
-# Write public keys to file
-write_public_keys
-
 echo "${INFO} starting cronjob"
 cron
 
 if [ "${WEB3SIGNER_AVAILABLE}" = true ]; then
     echo "${INFO} starting teku with validator and beaconchain"
+    # Check public keys is not empty
+    [ -z "${PUBLIC_KEYS_PARSED}" ] && { echo "${ERROR} no public keys found in API keymanager endpoint /eth/v1/keystores"; exit 1; }
+    # Write public keys to file
+    write_public_keys
 else
     echo "${WARN} web3signer not available"
     echo "${WARN} starting teku with validator only"
