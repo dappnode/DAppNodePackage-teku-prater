@@ -10,8 +10,6 @@
 ERROR="[ ERROR ]"
 INFO="[ INFO ]"
 
-WEB3SIGNER_AVAILABLE=true
-
 # Get public keys from API keymanager: bash array of strings
 # - Endpoint: http://web3signer.web3signer-prater.dappnode:9000/eth/v1/keystores
 # - Returns:
@@ -37,7 +35,6 @@ function get_public_keys() {
         fi
     else
         echo "${WARN} web3signer not available"
-        WEB3SIGNER_AVAILABLE=false
     fi
 }
 
@@ -61,10 +58,8 @@ get_public_keys
 echo "${INFO} starting cronjob"
 cron
 
-if [ "${WEB3SIGNER_AVAILABLE}" = true ]; then
+if [ ! -z "${PUBLIC_KEYS_PARSED}" ]; then
     echo "${INFO} starting teku with validator and beaconchain"
-    # Check public keys is not empty
-    [ -z "${PUBLIC_KEYS_PARSED}" ] && { echo "${ERROR} no public keys found in API keymanager endpoint /eth/v1/keystores"; exit 1; }
     # Write public keys to file
     write_public_keys
 
