@@ -67,21 +67,34 @@ if [ "${WEB3SIGNER_AVAILABLE}" = true ]; then
     [ -z "${PUBLIC_KEYS_PARSED}" ] && { echo "${ERROR} no public keys found in API keymanager endpoint /eth/v1/keystores"; exit 1; }
     # Write public keys to file
     write_public_keys
+
+    exec /opt/teku/bin/teku \
+    --network=prater \
+    --data-base-path=/opt/teku/data \
+    --eth1-endpoint=$HTTP_WEB3PROVIDER \
+    --validators-external-signer-url=$HTTP_WEB3SIGNER \
+    --validators-external-signer-public-keys=$PUBLIC_KEYS_PARSED \
+    --p2p-port=9000 \
+    --rest-api-enabled=true \
+    --rest-api-docs-enabled=true \
+    --initial-state=$INITIAL_STATE \
+    --log-destination=CONSOLE \
+    --validators-graffiti=\"$GRAFFITI\" \
+    $EXTRA_OPTS
 else
     echo "${WARN} web3signer not available"
-    echo "${WARN} starting teku with validator only"
+    echo "${WARN} starting teku with beaconchain only"
+    exec /opt/teku/bin/teku \
+    --network=prater \
+    --data-base-path=/opt/teku/data \
+    --eth1-endpoint=$HTTP_WEB3PROVIDER \
+    #--validators-external-signer-url=$HTTP_WEB3SIGNER \
+    #--validators-external-signer-public-keys=$PUBLIC_KEYS_PARSED \
+    --p2p-port=9000 \
+    --rest-api-enabled=true \
+    --rest-api-docs-enabled=true \
+    --initial-state=$INITIAL_STATE \
+    --log-destination=CONSOLE \
+    #--validators-graffiti=\"$GRAFFITI\" \
+    $EXTRA_OPTS
 fi
-
-exec /opt/teku/bin/teku \
-  --network=prater \
-  --data-base-path=/opt/teku/data \
-  --eth1-endpoint=$HTTP_WEB3PROVIDER \
-  --validators-external-signer-url=$HTTP_WEB3SIGNER \
-  --validators-external-signer-public-keys=$PUBLIC_KEYS_PARSED \
-  --p2p-port=9000 \
-  --rest-api-enabled=true \
-  --rest-api-docs-enabled=true \
-  --initial-state=$INITIAL_STATE \
-  --log-destination=CONSOLE \
-  --validators-graffiti=\"$GRAFFITI\" \
-  $EXTRA_OPTS
