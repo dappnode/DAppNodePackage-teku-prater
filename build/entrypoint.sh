@@ -4,8 +4,9 @@
 # 2. Checks if the public keys are valid
 # 3. CUSTOM: create string with public keys comma separated
 # 4. Starts the validator
-# IMPORTANT! the teku binary executes at the same time validator and beaconchain. The binary that starts the 
-# beaconchain must be executed in any case.
+# IMPORTANT! the teku binary executes at the same time validator and beaconchain. The
+# beaconchain must be executed in any case. The cronjob will kill the process if the
+# to restart the container if there are public keys found
 
 ERROR="[ ERROR ]"
 INFO="[ INFO ]"
@@ -29,9 +30,13 @@ function get_public_keys() {
     "${HTTP_WEB3SIGNER}/eth/v1/keystores"); then
         if PUBLIC_KEYS_PARSED=$(echo ${PUBLIC_KEYS} | jq -r '.data[].validating_pubkey' | tr ' ' ','); then
             # convert array of strings to string comma separated to be used by the teku binary
-            echo "${INFO} found public keys: $PUBLIC_KEYS_PARSED"
+            if [ ! -z "$PUBLIC_KEYS_PARSED" ]; then
+                echo "${INFO} found public keys: $PUBLIC_KEYS_PARSED"
+            else
+                echo "${WARN} no public keys found"
+            fi
         else
-            { echo "${ERROR} something wrong happened parsing the public keys"; exit 1; }
+            echo "${WARN} something wrong happened parsing the public keys"
         fi
     else
         echo "${WARN} web3signer not available"
@@ -41,7 +46,6 @@ function get_public_keys() {
 # Writes public keys to file by new line separated
 # creates file if it does not exist
 function write_public_keys() {
-    rm -rf ${PUBLIC_KEYS_FILE}
     echo "${INFO} writing public keys to file"
     for key in ${PUBLIC_KEYS_PARSED}; do
         echo "${key}" >> ${PUBLIC_KEYS_FILE}
@@ -54,6 +58,10 @@ function write_public_keys() {
 
 # Get public keys from API keymanager
 get_public_keys
+
+# Clean file
+rm -rf ${PUBLIC_KEYS_FILE}
+touch ${PUBLIC_KEYS_FILE}
 
 echo "${INFO} starting cronjob"
 cron
