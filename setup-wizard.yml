@@ -4,7 +4,7 @@ fields:
     target:
       type: environment
       name: HTTP_WEB3PROVIDER
-      service: teku-prater
+      service: teku
     title: Eth1.x node URL
     description: >-
       The dashboard must have access to a syncronized Eth1.x mainnet node.
@@ -20,7 +20,7 @@ fields:
     target:
       type: environment
       name: INITIAL_STATE
-      service: teku-prater
+      service: teku
     title: Initial State
     required: false
     description: >-
