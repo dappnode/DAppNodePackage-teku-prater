@@ -80,7 +80,7 @@ if [ ! -z "${PUBLIC_KEYS_PARSED}" ]; then
     --p2p-port=9000 \
     --rest-api-cors-origins=* \
     --rest-api-interface=0.0.0.0 \
-    --rest-api-port=5051 \
+    --rest-api-port=$BEACON_API_PORT \
     --rest-api-host-allowlist=* \
     --rest-api-enabled=true \
     --rest-api-docs-enabled=true \
@@ -100,7 +100,7 @@ else
     --p2p-port=9000 \
     --rest-api-cors-origins=* \
     --rest-api-interface=0.0.0.0 \
-    --rest-api-port=5051 \
+    --rest-api-port=$BEACON_API_PORT \
     --rest-api-host-allowlist=* \
     --rest-api-enabled=true \
     --rest-api-docs-enabled=true \

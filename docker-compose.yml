@@ -4,6 +4,7 @@ services:
     build:
       context: ./build
       args:
+        BEACON_API_PORT: 3500"
         UPSTREAM_VERSION: 22.1.1
     user: root
     image: "teku.teku-prater.dnp.dappnode.eth:0.1.0"
@@ -11,6 +12,7 @@ services:
       - "teku-prater-data:/opt/teku/data"
       - "teku-public-keys:/opt/teku/public-keys"
     environment:
+      BEACON_API_PORT: "3500"
       HTTP_WEB3PROVIDER: "http://goerli-geth.dappnode:8545"
       HTTP_WEB3SIGNER: "http://web3signer.web3signer-prater.dappnode:9000"
       PUBLIC_KEYS_FILE: /opt/teku/public-keys/public_keys.txt
