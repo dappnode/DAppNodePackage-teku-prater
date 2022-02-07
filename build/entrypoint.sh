@@ -66,6 +66,9 @@ touch ${PUBLIC_KEYS_FILE}
 echo "${INFO} starting cronjob"
 cron
 
+# Concatenate EXTRA_OPTS string
+[ ! -z "$INITIAL_STATE" ] && EXTRA_OPTS="${EXTRA_OPTS} --initial-state=${INITIAL_STATE}"
+
 if [ ! -z "${PUBLIC_KEYS_PARSED}" ]; then
     echo "${INFO} starting teku with validator and beaconchain"
     # Write public keys to file
@@ -84,7 +87,6 @@ if [ ! -z "${PUBLIC_KEYS_PARSED}" ]; then
     --rest-api-host-allowlist="*" \
     --rest-api-enabled=true \
     --rest-api-docs-enabled=true \
-    --initial-state=$INITIAL_STATE \
     --log-destination=CONSOLE \
     --validators-graffiti=\"$GRAFFITI\" \
     $EXTRA_OPTS
@@ -95,8 +97,6 @@ else
     --network=prater \
     --data-base-path=/opt/teku/data \
     --eth1-endpoint=$HTTP_WEB3PROVIDER \
-    #--validators-external-signer-url=$HTTP_WEB3SIGNER \
-    #--validators-external-signer-public-keys=$PUBLIC_KEYS_PARSED \
     --p2p-port=9000 \
     --rest-api-cors-origins="*" \
     --rest-api-interface=0.0.0.0 \
@@ -104,8 +104,6 @@ else
     --rest-api-host-allowlist="*" \
     --rest-api-enabled=true \
     --rest-api-docs-enabled=true \
-    --initial-state=$INITIAL_STATE \
     --log-destination=CONSOLE \
-    #--validators-graffiti=\"$GRAFFITI\" \
     $EXTRA_OPTS
 fi
