@@ -78,6 +78,8 @@ if [ ! -z "${PUBLIC_KEYS_PARSED}" ]; then
     --validators-external-signer-url=$HTTP_WEB3SIGNER \
     --validators-external-signer-public-keys=$PUBLIC_KEYS_PARSED \
     --p2p-port=9000 \
+    --rest-api-port=5051 \
+    --rest-api-host-allowlist=* \
     --rest-api-enabled=true \
     --rest-api-docs-enabled=true \
     --initial-state=$INITIAL_STATE \
@@ -94,6 +96,8 @@ else
     #--validators-external-signer-url=$HTTP_WEB3SIGNER \
     #--validators-external-signer-public-keys=$PUBLIC_KEYS_PARSED \
     --p2p-port=9000 \
+    --rest-api-port=5051 \
+    --rest-api-host-allowlist=* \
     --rest-api-enabled=true \
     --rest-api-docs-enabled=true \
     --initial-state=$INITIAL_STATE \

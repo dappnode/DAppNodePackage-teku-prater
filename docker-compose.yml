@@ -17,8 +17,8 @@ services:
       INITIAL_STATE: ""
       EXTRA_OPTS: ""
     ports:
-      - "9000:9000"
-      - "5051:5051"
+      - "9000/tcp"
+      - "9000/udp"
     restart: unless-stopped
 volumes:
   teku-prater-data: {}
