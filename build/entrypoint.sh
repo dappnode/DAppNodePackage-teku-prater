@@ -92,8 +92,6 @@ if [ ! -z "${PUBLIC_KEYS_PARSED}" ]; then
     # Create comma separated string of public keys
     echo "${INFO} creating comma separated string of public keys"
     PUBLIC_KEYS_COMMA_SEPARATED=$(echo ${PUBLIC_KEYS_COMMA_SEPARATED} | tr ' ' ',')
-else 
-    echo "${WARN} no public keys found"
 fi
 
 echo "${INFO} starting cronjob"
