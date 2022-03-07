@@ -10,12 +10,11 @@ services:
     image: "teku.teku-prater.dnp.dappnode.eth:0.1.0"
     volumes:
       - "teku-prater-data:/opt/teku/data"
-      - "teku-public-keys:/opt/teku/public-keys"
     environment:
       BEACON_API_PORT: 3500
       HTTP_WEB3PROVIDER: "http://goerli-geth.dappnode:8545"
       HTTP_WEB3SIGNER: "http://web3signer.web3signer-prater.dappnode:9000"
-      PUBLIC_KEYS_FILE: /opt/teku/public-keys/public_keys.txt
+      PUBLIC_KEYS_FILE: /public_keys.txt
       INITIAL_STATE: ""
       EXTRA_OPTS: ""
     ports:
@@ -24,4 +23,3 @@ services:
     restart: unless-stopped
 volumes:
   teku-prater-data: {}
-  teku-public-keys: {}
