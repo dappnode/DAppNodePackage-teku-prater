@@ -53,18 +53,18 @@ function get_public_keys() {
         fi
     else
         echo "${WARN} web3signer not available"
-        
     fi
 }
 
-# Clean old file and writes new public keys file
+function clean_public_keys() {
+    rm -rf ${PUBLIC_KEYS_FILE}
+    touch ${PUBLIC_KEYS_FILE}
+}
+
+# Writes public keys
 # - by new line separated
 # - creates file if it does not exist
 function write_public_keys() {
-    # Clean file
-    rm -rf ${PUBLIC_KEYS_FILE}
-    touch ${PUBLIC_KEYS_FILE}
-
     echo "${INFO} writing public keys to file"
     for PUBLIC_KEY in ${PUBLIC_KEYS_API}; do
         if [ ! -z "${PUBLIC_KEY}" ]; then
@@ -86,6 +86,9 @@ ensure_envs_exist
 # Get public keys from API keymanager
 get_public_keys
 
+# Clean old public keys
+clean_public_keys
+
 if [ ! -z "${PUBLIC_KEYS_API}" ]; then
     # Write public keys to file
     echo "${INFO} writing public keys file"
@@ -98,12 +101,33 @@ cron
 # Concatenate EXTRA_OPTS string
 [ ! -z "$INITIAL_STATE" ] && EXTRA_OPTS="${EXTRA_OPTS} --initial-state=${INITIAL_STATE}"
 
-exec /opt/teku/bin/teku \
+# if public_keys_comma_separated is not empty, start the validator
+if [ ! -z "${PUBLIC_KEYS_COMMA_SEPARATED}" ]; then
+    echo "${INFO} starting teku with validator"
+
+    exec /opt/teku/bin/teku \
+        --network=prater \
+        --data-base-path=/opt/teku/data \
+        --eth1-endpoint=$HTTP_WEB3PROVIDER \
+        --validators-external-signer-url=$HTTP_WEB3SIGNER \
+        --validators-external-signer-public-keys=$PUBLIC_KEYS_COMMA_SEPARATED \
+        --p2p-port=9000 \
+        --rest-api-cors-origins="*" \
+        --rest-api-interface=0.0.0.0 \
+        --rest-api-port=$BEACON_API_PORT \
+        --rest-api-host-allowlist="*" \
+        --rest-api-enabled=true \
+        --rest-api-docs-enabled=true \
+        --log-destination=CONSOLE \
+        --validators-graffiti=\"$GRAFFITI\" \
+        $EXTRA_OPTS
+else
+    echo "${WARN} no public keys found, starting teku without validator"
+
+    exec /opt/teku/bin/teku \
     --network=prater \
     --data-base-path=/opt/teku/data \
     --eth1-endpoint=$HTTP_WEB3PROVIDER \
-    --validators-external-signer-url=$HTTP_WEB3SIGNER \
-    --validators-external-signer-public-keys=$PUBLIC_KEYS_COMMA_SEPARATED \
     --p2p-port=9000 \
     --rest-api-cors-origins="*" \
     --rest-api-interface=0.0.0.0 \
@@ -112,5 +136,5 @@ exec /opt/teku/bin/teku \
     --rest-api-enabled=true \
     --rest-api-docs-enabled=true \
     --log-destination=CONSOLE \
-    --validators-graffiti=\"$GRAFFITI\" \
     $EXTRA_OPTS
+fi
