@@ -96,7 +96,7 @@ if [ ! -z "${PUBLIC_KEYS_API}" ]; then
 fi
 
 echo "${INFO} starting cronjob"
-cron
+CLIENT_ADDRESS=http://teku-prater.dappnode CLIENT_PORT=9000 NETWORK=prater auto-check-remote-keys &
 
 # Concatenate EXTRA_OPTS string
 [ ! -z "$INITIAL_STATE" ] && EXTRA_OPTS="${EXTRA_OPTS} --initial-state=${INITIAL_STATE}"

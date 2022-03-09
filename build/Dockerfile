@@ -1,11 +1,10 @@
 ARG UPSTREAM_VERSION
 
-###########
-# BUILDER #
-###########
-# Get jq binaries (curl is already in the consensys image)
-FROM debian:bullseye-slim as builder
-RUN apt update && apt install cron jq --yes
+FROM golang:1.16.15-alpine3.15 as builder
+WORKDIR /app 
+RUN apk update && apk add git && git clone https://github.com/dappnode/eth2-pubkeys-autocheck.git
+WORKDIR /app/eth2-pubkeys-autocheck/build
+RUN go build -o auto-check-remote-keys main.go
 
 ########
 # TEKU #
@@ -17,20 +16,10 @@ FROM consensys/teku:$UPSTREAM_VERSION
 COPY --from=builder /usr/bin/jq /usr/bin/jq
 COPY --from=builder /usr/lib/x86_64-linux-gnu/libjq* /usr/lib/x86_64-linux-gnu/
 COPY --from=builder /usr/lib/x86_64-linux-gnu/libonig* /usr/lib/x86_64-linux-gnu/
-# Copy crontab and cron binary
-COPY --from=builder /usr/sbin/cron /usr/sbin/cron
-COPY --from=builder /usr/bin/crontab /usr/bin/crontab
-COPY --from=builder /var/spool/cron /var/spool/cron
-
-# Setup cronjob
-COPY get-keys-cron /etc/cron.d/
-COPY get-keys.sh /usr/local/bin/get-keys.sh
-# Apply cron job
-RUN crontab /etc/cron.d/get-keys-cron
-
 
 ENV JAVA_OPTS="-Xmx4g"
 
+COPY --from=builder /app/build/auto-check-remote-keys /usr/local/bin/auto-check-remote-keys
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 
 # API port: https://docs.teku.consensys.net/en/latest/Reference/CLI/CLI-Syntax/#rest-api-port
