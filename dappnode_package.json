@@ -8,9 +8,7 @@
   "description": "teku-prater",
   "type": "service",
   "author": "mgarciate <mgarciate@gmail.com> (https://github.com/mgarciate)",
-  "contributors": [
-    "mgarciate <mgarciate@gmail.com> (https://github.com/mgarciate)"
-  ],
+  "contributors": ["mgarciate <mgarciate@gmail.com> (https://github.com/mgarciate)"],
   "categories": ["Blockchain"],
   "repository": {
     "type": "git",
@@ -23,5 +21,12 @@
     "homepage": "https://docs.teku.consensys.net",
     "readme": "https://github.com/ConsenSys/teku/blob/master/README.md"
   },
-  "license": "GLP-3.0"
+  "license": "GLP-3.0",
+  "requirements": {
+    "minimumDappnodeVersion": "0.2.51"
+  },
+  "dependencies": {
+    "web3signer-prater.dnp.dappnode.eth": "latest",
+    "goerli-geth.dnp.dappnode.eth": "latest"
+  }
 }
