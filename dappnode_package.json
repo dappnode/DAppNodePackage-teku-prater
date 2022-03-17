@@ -1,17 +1,17 @@
 {
   "name": "teku-prater.dnp.dappnode.eth",
   "version": "0.1.0",
-  "upstreamVersion": "22.1.1",
+  "upstreamVersion": "22.3.1",
   "architectures": ["linux/amd64"],
   "upstreamRepo": "ConsenSys/teku",
   "shortDescription": "teku-prater",
   "description": "teku-prater",
   "type": "service",
-  "author": "mgarciate <mgarciate@gmail.com> (https://github.com/mgarciate)",
+  "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
   "contributors": [
     "mgarciate <mgarciate@gmail.com> (https://github.com/mgarciate)"
   ],
-  "categories": ["Blockchain"],
+  "categories": ["Blockchain", "ETH2.0"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ConsenSys/teku.git"
@@ -20,8 +20,17 @@
     "url": "https://github.com/ConsenSys/teku/issues"
   },
   "links": {
+    "ui": "http://ui.web3signer-prater.dappnode?signer_url=http://web3signer.web3signer-prater.dappnode:9000",
     "homepage": "https://docs.teku.consensys.net",
-    "readme": "https://github.com/ConsenSys/teku/blob/master/README.md"
+    "readme": "https://github.com/ConsenSys/teku/blob/master/README.md",
+    "docs": "https://docs.teku.consensys.net"
   },
-  "license": "GLP-3.0"
+  "license": "GLP-3.0",
+  "requirements": {
+    "minimumDappnodeVersion": "0.2.51"
+  },
+  "dependencies": {
+    "web3signer-prater.dnp.dappnode.eth": "latest",
+    "goerli-geth.dnp.dappnode.eth": "latest"
+  }
 }
