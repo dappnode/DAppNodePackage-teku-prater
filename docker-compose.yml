@@ -1,6 +1,6 @@
 version: "3.5"
 services:
-  beacon-chain: 
+  beacon-chain:
     build:
       context: ./beacon-chain
       args:
@@ -13,9 +13,10 @@ services:
     volumes:
       - "teku-prater-data:/opt/teku/data"
     ports:
-      - "9000/tcp"
-      - "9000/udp"
+      - 9000/tcp
+      - 9000/udp
     restart: unless-stopped
+    image: "beacon-chain.teku-prater.dnp.dappnode.eth:0.1.0"
   validator:
     build:
       context: ./validator
@@ -31,5 +32,6 @@ services:
       INITIAL_STATE: ""
       EXTRA_OPTS: ""
     restart: unless-stopped
+    image: "validator.teku-prater.dnp.dappnode.eth:0.1.0"
 volumes:
   teku-prater-data: {}
