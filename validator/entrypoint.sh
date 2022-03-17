@@ -8,7 +8,7 @@ INFO="[ INFO ]"
 PUBLIC_KEYS_COMMA_SEPARATED=""
 
 function ensure_envs_exist() {
-    [ -z "${BEACON_RPC_GATEWAY_PROVIDER}" ] && { echo "${ERROR} BEACON_RPC_GATEWAY_PROVIDER is not set"; exit 1; }
+    [ -z "${BEACON_NODE_ADDR}" ] && { echo "${ERROR} BEACON_NODE_ADDR is not set"; exit 1; }
     [ -z "${HTTP_WEB3SIGNER}" ] && { echo "${ERROR} HTTP_WEB3SIGNER is not set"; exit 1; }
     [ -z "${PUBLIC_KEYS_FILE}" ] && { echo "${ERROR} PUBLIC_KEYS_FILE is not set"; exit 1; }
     [ -z "${SUPERVISOR_CONF}" ] && { echo "${ERROR} SUPERVISOR_CONF is not set"; exit 1; }
