@@ -1,6 +1,6 @@
 #!/bin/bash
 
-exec -c /opt/teku/bin/teku \
+exec /opt/teku/bin/teku \
     --network=prater \
     --data-base-path=/opt/teku/data \
     --eth1-endpoint=$HTTP_WEB3PROVIDER \
