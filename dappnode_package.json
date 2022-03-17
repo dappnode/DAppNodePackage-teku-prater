@@ -1,14 +1,16 @@
 {
   "name": "teku-prater.dnp.dappnode.eth",
   "version": "0.1.0",
-  "upstreamVersion": "22.3.0",
+  "upstreamVersion": "22.3.1",
   "architectures": ["linux/amd64"],
   "upstreamRepo": "ConsenSys/teku",
   "shortDescription": "teku-prater",
   "description": "teku-prater",
   "type": "service",
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
-  "contributors": ["mgarciate <mgarciate@gmail.com> (https://github.com/mgarciate)"],
+  "contributors": [
+    "mgarciate <mgarciate@gmail.com> (https://github.com/mgarciate)"
+  ],
   "categories": ["Blockchain", "ETH2.0"],
   "repository": {
     "type": "git",
