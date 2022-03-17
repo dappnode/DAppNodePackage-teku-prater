@@ -3,7 +3,7 @@ ARG UPSTREAM_VERSION
 ########
 # TEKU #
 ########
-FROM consensys/teku:22.3.1
+FROM consensys/teku:$UPSTREAM_VERSION
 
 USER root 
 RUN apt update && apt install cron jq supervisor --yes
