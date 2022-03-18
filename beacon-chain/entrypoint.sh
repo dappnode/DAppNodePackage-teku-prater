@@ -11,7 +11,7 @@ exec /opt/teku/bin/teku \
     --rest-api-cors-origins="*" \
     --rest-api-interface=0.0.0.0 \
     --rest-api-port=$BEACON_API_PORT \
-    --rest-api-host-allowlist="validator.teku-prater.dappnode" \
+    --rest-api-host-allowlist "*" \
     --rest-api-enabled=true \
     --rest-api-docs-enabled=true \
     --log-destination=CONSOLE \
