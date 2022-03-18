@@ -14,7 +14,7 @@ exec /opt/teku/bin/teku \
     --rest-api-host-allowlist "*" \
     --rest-api-enabled=true \
     --rest-api-docs-enabled=true \
-    --metrics-enabled \
+    --metrics-enabled=true \
     --metrics-interface 0.0.0.0 \
     --metrics-port 8008 \
     --metrics-host-allowlist "*" \
