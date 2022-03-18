@@ -9,6 +9,7 @@ services:
     environment:
       BEACON_API_PORT: 3500
       HTTP_WEB3PROVIDER: "http://goerli-geth.dappnode:8545"
+      CHECKPOINT_SYNC_URL: ""
       EXTRA_OPTS: ""
     volumes:
       - "teku-prater-data:/opt/teku/data"
