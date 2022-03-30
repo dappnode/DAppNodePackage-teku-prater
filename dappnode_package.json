@@ -8,9 +8,12 @@
   "description": "teku-prater",
   "type": "service",
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
-  "contributors": [
-    "mgarciate <mgarciate@gmail.com> (https://github.com/mgarciate)"
-  ],
+  "contributors": ["mgarciate <mgarciate@gmail.com> (https://github.com/mgarciate)"],
+  "chain": {
+    "driver": "ethereum",
+    "serviceName": "beacon-chain",
+    "portNumber": 3500
+  },
   "categories": ["Blockchain", "ETH2.0"],
   "repository": {
     "type": "git",
