@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Concatenate EXTRA_OPTS string
-[ ! -z "$CHECKPOINT_SYNC_URL" ] && EXTRA_OPTS="${EXTRA_OPTS} --initial-state=${CHECKPOINT_SYNC_URL}"
+[ ! -z "$CHECKPOINT_SYNC_URL" ] && EXTRA_OPTS="${EXTRA_OPTS} --initial-state=${CHECKPOINT_SYNC_URL}/eth/v2/debug/beacon/states/finalized"
 
 exec /opt/teku/bin/teku \
     --network=prater \
