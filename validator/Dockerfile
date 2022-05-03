@@ -6,7 +6,7 @@ ARG UPSTREAM_VERSION
 FROM consensys/teku:$UPSTREAM_VERSION
 
 USER root 
-RUN apt update && apt install cron jq ca-certificates --yes
+RUN apt update && apt install jq ca-certificates --yes
 
 ENV JAVA_OPTS="-Xmx4g"
 
