@@ -1,22 +1,9 @@
 #!/bin/bash
 
-export CLIENT="teku"
-export NETWORK="prater"
-export VALIDATOR_PORT=3500
-export WEB3SIGNER_API="http://web3signer.web3signer-${NETWORK}.dappnode:9000"
-export CLIENT_API="http://validator.${CLIENT}-${NETWORK}.dappnode:${VALIDATOR_PORT}"
-
-if [[ $LOG_TYPE == "DEBUG" ]]; then
-  export LOG_LEVEL=0
-elif [[ $LOG_TYPE == "INFO" ]]; then
-  export LOG_LEVEL=1
-elif [[ $LOG_TYPE == "WARN" ]]; then
-  export LOG_LEVEL=2
-elif [[ $LOG_TYPE == "ERROR" ]]; then
-  export LOG_LEVEL=3
-else
-  export LOG_LEVEL=1
-fi
+CLIENT="teku"
+NETWORK="prater"
+VALIDATOR_PORT=3500
+WEB3SIGNER_API="http://web3signer.web3signer-${NETWORK}.dappnode:9000"
 
 WEB3SIGNER_RESPONSE=$(curl -s -w "%{http_code}" -X GET -H "Content-Type: application/json" -H "Host: validator.${CLIENT}-${NETWORK}.dappnode" "${WEB3SIGNER_API}/eth/v1/keystores")
 HTTP_CODE=${WEB3SIGNER_RESPONSE: -3}
@@ -32,14 +19,8 @@ else
   fi
 fi
 
-# Loads envs into /etc/environment to be used by the cronjob
-env >>/etc/environment
-# start cron and disown it
-cron -f &
-disown
-
 exec /opt/teku/bin/teku --log-destination=CONSOLE \
-   validator-client \
+  validator-client \
   --network=auto \
   --data-base-path=/opt/teku/data \
   --beacon-node-api-endpoint="$BEACON_NODE_ADDR" \
@@ -53,7 +34,7 @@ exec /opt/teku/bin/teku --log-destination=CONSOLE \
   --validator-api-port="$VALIDATOR_PORT" \
   --validator-api-host-allowlist=* \
   --validators-graffiti=\"${GRAFFITI}\" \
-  --validator-api-keystore-file=/usr/local/share/ca-certificates/server.crt \
-  --validator-api-keystore-password-file=/usr/local/share/ca-certificates/server.key \
+  --validator-api-keystore-file=/cert/teku_client_keystore.p12 \
+  --validator-api-keystore-password-file=/cert/teku_keystore_password.txt \
   --logging=ALL \
   ${EXTRA_OPTS}
