@@ -22,7 +22,8 @@ else
   fi
 fi
 
-exec -c /opt/teku/bin/teku --log-destination=CONSOLE \
+# Teku must start with the current env due to JAVA_HOME var
+exec /opt/teku/bin/teku --log-destination=CONSOLE \
   validator-client \
   --network=auto \
   --data-base-path=/opt/teku/data \
