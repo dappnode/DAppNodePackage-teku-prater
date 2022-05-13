@@ -24,12 +24,9 @@ services:
       args:
         UPSTREAM_VERSION: 22.5.0
     environment:
+      LOG_TYPE: INFO
       BEACON_NODE_ADDR: "http://beacon-chain.teku-prater.dappnode:3500"
-      HTTP_WEB3SIGNER: "http://web3signer.web3signer-prater.dappnode:9000"
-      PUBLIC_KEYS_FILE: /public_keys.txt
       GRAFFITI: validating_from_DAppNode
-      SUPERVISOR_CONF: /etc/supervisor/conf.d/supervisord.conf
-      INITIAL_STATE: ""
       EXTRA_OPTS: ""
     restart: unless-stopped
     image: "validator.teku-prater.dnp.dappnode.eth:0.1.0"
