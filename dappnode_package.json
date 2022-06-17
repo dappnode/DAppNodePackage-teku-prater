@@ -1,7 +1,7 @@
 {
   "name": "teku-prater.dnp.dappnode.eth",
   "version": "0.1.0",
-  "upstreamVersion": "22.5.2",
+  "upstreamVersion": "22.6.0",
   "architectures": ["linux/amd64"],
   "upstreamRepo": "ConsenSys/teku",
   "shortDescription": "Teku prater ETH2.0 Beacon chain + validator",
