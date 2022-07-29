@@ -6,7 +6,8 @@
 exec /opt/teku/bin/teku \
     --network=prater \
     --data-base-path=/opt/teku/data \
-    --eth1-endpoint=$HTTP_WEB3PROVIDER \
+    --ee-endpoint=$HTTP_ENGINE \
+    --ee-jwt-secret-file="/jwtsecret" \
     --p2p-port=$P2P_PORT \
     --rest-api-cors-origins="*" \
     --rest-api-interface=0.0.0.0 \
