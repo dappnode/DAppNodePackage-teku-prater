@@ -3,6 +3,18 @@
 # Concatenate EXTRA_OPTS string
 [[ -n $CHECKPOINT_SYNC_URL ]] && EXTRA_OPTS="--initial-state=${CHECKPOINT_SYNC_URL}/eth/v2/debug/beacon/states/finalized ${EXTRA_OPTS}"
 
+case $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_PRATER in
+"goerli-geth.dnp.dappnode.eth")
+    HTTP_ENGINE="http://goerli-geth.dappnode:8551"
+    ;;
+*)
+    echo "Unknown value for _DAPPNODE_GLOBAL_EXECUTION_CLIENT_PRATER: $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_PRATER"
+    HTTP_ENGINE=_DAPPNODE_GLOBAL_EXECUTION_CLIENT_PRATER
+    ;;
+esac
+
+# TODO: mevboost variable
+
 exec /opt/teku/bin/teku \
     --network=prater \
     --data-base-path=/opt/teku/data \

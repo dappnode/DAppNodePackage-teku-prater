@@ -8,7 +8,6 @@ services:
         UPSTREAM_VERSION: 22.8.0
     environment:
       BEACON_API_PORT: 3500
-      HTTP_ENGINE: "http://goerli-geth.dappnode:8551"
       P2P_PORT: 9505
       CHECKPOINT_SYNC_URL: ""
       EXTRA_OPTS: ""
