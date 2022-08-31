@@ -5,7 +5,7 @@ services:
       context: ./beacon-chain
       args:
         BEACON_API_PORT: 3500
-        UPSTREAM_VERSION: 22.8.0
+        UPSTREAM_VERSION: 22.8.2
     environment:
       BEACON_API_PORT: 3500
       HTTP_ENGINE: "http://goerli-geth.dappnode:8551"
@@ -23,7 +23,7 @@ services:
     build:
       context: ./validator
       args:
-        UPSTREAM_VERSION: 22.8.0
+        UPSTREAM_VERSION: 22.8.2
     environment:
       LOG_TYPE: INFO
       BEACON_NODE_ADDR: "http://beacon-chain.teku-prater.dappnode:3500"
