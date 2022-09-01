@@ -13,7 +13,11 @@ case $_DAPPNODE_GLOBAL_EXECUTION_CLIENT_PRATER in
     ;;
 esac
 
-# TODO: mevboost variable
+# MEVBOOST: https://docs.teku.consensys.net/en/latest/HowTo/Builder-Network/
+if [ -n "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" ] && [ "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" == "true" ]; then
+    echo "MEVBOOST is enabled"
+    EXTRA_OPTS="--builder-endpoint=http://mev-boost-goerli.mev-boost.dappnode:18550 ${EXTRA_OPTS}"
+fi
 
 exec /opt/teku/bin/teku \
     --network=prater \

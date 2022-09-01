@@ -22,6 +22,12 @@ else
   fi
 fi
 
+# MEVBOOST: https://docs.teku.consensys.net/en/latest/HowTo/Builder-Network/
+if [ -n "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" ] && [ "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" == "true" ]; then
+  echo "MEVBOOST is enabled"
+  EXTRA_OPTS="--validators-builder-registration-default-enabled ${EXTRA_OPTS}"
+fi
+
 # Teku must start with the current env due to JAVA_HOME var
 exec /opt/teku/bin/teku --log-destination=CONSOLE \
   validator-client \
