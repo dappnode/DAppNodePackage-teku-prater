@@ -8,7 +8,6 @@ services:
         UPSTREAM_VERSION: 22.9.0
     environment:
       BEACON_API_PORT: 3500
-      HTTP_ENGINE: ""
       CHECKPOINT_SYNC_URL: ""
       P2P_PORT: 9505
       EXTRA_OPTS: ""

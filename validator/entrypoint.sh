@@ -1,9 +1,20 @@
 #!/bin/bash
 
-CLIENT="teku"
 NETWORK="prater"
 VALIDATOR_PORT=3500
 WEB3SIGNER_API="http://web3signer.web3signer-${NETWORK}.dappnode:9000"
+
+# MEVBOOST: https://docs.teku.consensys.net/en/latest/HowTo/Builder-Network/
+if [ -n "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" ] && [ "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" == "true" ]; then
+  echo "MEVBOOST is enabled"
+  MEVBOOST_URL="http://mev-boost.mev-boost-goerli.dappnode:18550"
+  if curl --retry 5 --retry-delay 5 --retry-all-errors "${MEVBOOST_URL}"; then
+    EXTRA_OPTS="--validators-builder-registration-default-enabled ${EXTRA_OPTS}"
+  else
+    echo "MEVBOOST is enabled but ${MEVBOOST_URL} is not reachable"
+    curl -X POST -G 'http://my.dappnode/notification-send' --data-urlencode 'type=danger' --data-urlencode title="${MEVBOOST_URL} is not available" --data-urlencode 'body=Make sure the mevboost is available and running'
+  fi
+fi
 
 # Teku must start with the current env due to JAVA_HOME var
 exec /opt/teku/bin/teku --log-destination=CONSOLE \
