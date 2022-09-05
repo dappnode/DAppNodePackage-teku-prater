@@ -19,7 +19,7 @@ fi
 # Teku must start with the current env due to JAVA_HOME var
 exec /opt/teku/bin/teku --log-destination=CONSOLE \
   validator-client \
-  --network=auto \
+  --network=${NETWORK} \
   --data-base-path=/opt/teku/data \
   --beacon-node-api-endpoint="$BEACON_NODE_ADDR" \
   --validators-external-signer-url="$WEB3SIGNER_API" \
