@@ -23,7 +23,7 @@ fields:
   - id: feeRecipientAddress
     target:
       type: environment
-      name: DEFAULT_FEE_RECIPIENT
+      name: FEE_RECIPIENT_ADDRESS
       service:  validator
     title: Fee Recipient Address
     description: >-
