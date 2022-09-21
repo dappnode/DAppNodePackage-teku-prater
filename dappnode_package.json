@@ -4,8 +4,8 @@
   "upstreamVersion": "22.9.1",
   "architectures": ["linux/amd64"],
   "upstreamRepo": "ConsenSys/teku",
-  "shortDescription": "Teku prater ETH2.0 Beacon chain + validator",
-  "description": "Teku prater ETH2.0 Beacon chain + validator",
+  "shortDescription": "Teku Prater Beacon chain + validator",
+  "description": "Teku implementation of Prater Beacon chain + validator",
   "type": "service",
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
   "contributors": [
