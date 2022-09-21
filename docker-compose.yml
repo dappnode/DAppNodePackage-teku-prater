@@ -11,7 +11,6 @@ services:
       CHECKPOINT_SYNC_URL: ""
       P2P_PORT: 9505
       EXTRA_OPTS: ""
-      FEE_RECIPIENT_ADDRESS: ""
     volumes:
       - "teku-prater-data:/opt/teku/data"
     ports:
