@@ -16,6 +16,23 @@ if [ -n "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" ] && [ "$_DAPPNODE_GLOBAL_MEVBOOST_P
   fi
 fi
 
+
+
+if [[ "$EXIT_VALIDATOR" == "I want to exit my validators" ]]; then
+    echo "Check connectivity with the web3signer"
+    WEB3SIGNER_STATUS=$(curl -s  http://web3signer.web3signer-prater.dappnode:9000/healthcheck | jq '.status')
+    if [[ "$WEB3SIGNER_STATUS" == '"UP"' ]]; then
+    echo "Proceeds to do the voluntary exit of the next keystores:"
+    echo "$KEYSTORES_VOLUNTARY_EXIT"
+    echo yes | exec /opt/teku/bin/teku voluntary-exit --beacon-node-api-endpoint=http://beacon-chain.teku-prater.dappnode:3500 \
+        --validators-external-signer-public-keys=$KEYSTORES_VOLUNTARY_EXIT \
+        --validators-external-signer-url=$WEB3SIGNER_API
+    else
+      echo "The web3signer-prater is not running or the teku package has not access to the web3signer"
+    fi
+fi
+
+
 # Teku must start with the current env due to JAVA_HOME var
 exec /opt/teku/bin/teku --log-destination=CONSOLE \
   validator-client \
