@@ -5,32 +5,33 @@ services:
       context: ./beacon-chain
       args:
         BEACON_API_PORT: 3500
-        UPSTREAM_VERSION: 22.9.0
+        UPSTREAM_VERSION: 22.9.1
     environment:
       BEACON_API_PORT: 3500
       CHECKPOINT_SYNC_URL: ""
       P2P_PORT: 9505
       EXTRA_OPTS: ""
-      FEE_RECIPIENT_ADDRESS: ""
     volumes:
       - "teku-prater-data:/opt/teku/data"
     ports:
       - "9505:9505/tcp"
       - "9505:9505/udp"
     restart: unless-stopped
-    image: "beacon-chain.teku-prater.dnp.dappnode.eth:0.1.0"
+    image: "beacon-chain.teku-prater.dnp.dappnode.eth:0.1.11"
   validator:
     build:
       context: ./validator
       args:
-        UPSTREAM_VERSION: 22.9.0
+        UPSTREAM_VERSION: 22.9.1
     environment:
       LOG_TYPE: INFO
       BEACON_NODE_ADDR: "http://beacon-chain.teku-prater.dappnode:3500"
       GRAFFITI: validating_from_DAppNode
       EXTRA_OPTS: ""
+      EXIT_VALIDATOR: ""
+      KEYSTORES_VOLUNTARY_EXIT: ""
       FEE_RECIPIENT_ADDRESS: ""
     restart: unless-stopped
-    image: "validator.teku-prater.dnp.dappnode.eth:0.1.0"
+    image: "validator.teku-prater.dnp.dappnode.eth:0.1.11"
 volumes:
   teku-prater-data: {}
