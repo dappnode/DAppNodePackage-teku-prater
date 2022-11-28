@@ -10,7 +10,6 @@ services:
       BEACON_API_PORT: 3500
       CHECKPOINT_SYNC_URL: ""
       P2P_PORT: 9505
-      FEE_RECIPIENT_ADDRESS: ""
       EXTRA_OPTS: ""
     volumes:
       - "teku-prater-data:/opt/teku/data"
