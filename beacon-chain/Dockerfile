@@ -20,6 +20,6 @@ COPY jwtsecret.hex /jwtsecret
 # API port: https://docs.teku.consensys.net/en/latest/Reference/CLI/CLI-Syntax/#rest-api-port
 EXPOSE $BEACON_API_PORT
 # P2P port: https://docs.teku.consensys.net/en/latest/Reference/CLI/CLI-Syntax/#p2p-port
-#EXPOSE 9000
+EXPOSE $P2P_PORT
 
 ENTRYPOINT [ "entrypoint.sh" ]
