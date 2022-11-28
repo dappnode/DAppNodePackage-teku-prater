@@ -52,4 +52,5 @@ exec /opt/teku/bin/teku \
     --metrics-port 8008 \
     --metrics-host-allowlist "*" \
     --log-destination=CONSOLE \
+    --validators-proposer-default-fee-recipient="${FEE_RECIPIENT_ADDRESS}" \
     $EXTRA_OPTS
