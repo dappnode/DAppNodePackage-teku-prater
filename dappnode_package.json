@@ -1,11 +1,11 @@
 {
   "name": "teku-prater.dnp.dappnode.eth",
   "version": "0.1.0",
-  "upstreamVersion": "22.4.0",
+  "upstreamVersion": "23.1.1",
   "architectures": ["linux/amd64"],
   "upstreamRepo": "ConsenSys/teku",
-  "shortDescription": "Teku prater ETH2.0 Beacon chain + validator",
-  "description": "Teku prater ETH2.0 Beacon chain + validator",
+  "shortDescription": "Teku Prater Beacon chain + validator",
+  "description": "Teku implementation of Prater Beacon chain + validator",
   "type": "service",
   "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
   "contributors": [
@@ -15,10 +15,10 @@
   "categories": ["Blockchain", "ETH2.0", "Prater"],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ConsenSys/teku.git"
+    "url": "git+https://github.com/dappnode/DAppNodePackage-teku-prater.git"
   },
   "bugs": {
-    "url": "https://github.com/ConsenSys/teku/issues"
+    "url": "https://github.com/dappnode/DAppNodePackage-teku-prater/issues"
   },
   "links": {
     "ui": "http://ui.web3signer-prater.dappnode?signer_url=http://web3signer.web3signer-prater.dappnode:9000",
@@ -26,17 +26,26 @@
     "readme": "https://github.com/ConsenSys/teku/blob/master/README.md",
     "docs": "https://docs.teku.consensys.net"
   },
-  "license": "GLP-3.0",
+  "license": "Apache-2.0",
   "requirements": {
-    "minimumDappnodeVersion": "0.2.51"
+    "minimumDappnodeVersion": "0.2.58"
   },
   "chain": {
     "driver": "ethereum-beacon-chain",
     "serviceName": "beacon-chain",
     "portNumber": 3500
   },
-  "dependencies": {
-    "web3signer-prater.dnp.dappnode.eth": "latest",
-    "goerli-geth.dnp.dappnode.eth": "latest"
-  }
+  "warnings": {
+    "onRemove": "Make sure your web3signer does not have this client selected or you will stop validating! (Packages > web3signer > config > client)"
+  },
+  "globalEnvs": [
+    {
+      "envs": ["EXECUTION_CLIENT_PRATER", "MEVBOOST_PRATER"],
+      "services": ["beacon-chain"]
+    },
+    {
+      "envs": ["MEVBOOST_PRATER"],
+      "services": ["validator"]
+    }
+  ]
 }

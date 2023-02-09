@@ -6,19 +6,12 @@ ARG UPSTREAM_VERSION
 FROM consensys/teku:$UPSTREAM_VERSION
 
 USER root 
-RUN apt update && apt install cron jq supervisor --yes
-
-# Setup cronjob
-COPY get-keys-cron /etc/cron.d/
-COPY get-keys.sh /usr/local/bin/get-keys.sh
-# Apply cron job
-RUN crontab /etc/cron.d/get-keys-cron
+RUN apt update && apt install curl jq ca-certificates --yes
 
 ENV JAVA_OPTS="-Xmx4g"
 
-# Copy supervisor config
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
+COPY /security/validator-api-bearer /opt/teku/data/validator/key-manager/validator-api-bearer 
+COPY /security/cert /cert
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 
 ENTRYPOINT [ "entrypoint.sh" ]
