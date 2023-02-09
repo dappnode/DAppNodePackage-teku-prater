@@ -6,12 +6,12 @@ WEB3SIGNER_API="http://web3signer.web3signer-${NETWORK}.dappnode:9000"
 
 # MEVBOOST: https://docs.teku.consensys.net/en/latest/HowTo/Builder-Network/
 if [ -n "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" ] && [ "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" == "true" ]; then
-  echo "MEVBOOST is enabled"
+  echo "MEV-BOOST is Enabled"
   MEVBOOST_URL="http://mev-boost.mev-boost-goerli.dappnode:18550"
   EXTRA_OPTS="--validators-builder-registration-default-enabled --validators-proposer-blinded-blocks-enabled=true ${EXTRA_OPTS}"
-  if curl --retry 5 --retry-delay 5 --retry-all-errors "${MEVBOOST_URL}"; then
-    echo "MEVBOOST Göerli is enabled but ${MEVBOOST_URL} is not reachable"
-    curl -X POST -G 'http://my.dappnode/notification-send' --data-urlencode 'type=danger' --data-urlencode title="${MEVBOOST_URL} is not available" --data-urlencode 'body=Make sure the mevboost is available and running'
+  if curl --retry 5 --retry-delay 5 --retry-connrefused "${MEVBOOST_URL}"; then
+    echo "MEV-BOOST Göerli/Prater is enabled but ${MEVBOOST_URL} is not reachable"
+    curl -X POST -G 'http://my.dappnode/notification-send' --data-urlencode 'type=danger' --data-urlencode title="${MEVBOOST_URL} is not available" --data-urlencode 'body=Make sure the Göerli/Prater MEV-Boost DNP is available and running'
   fi
 fi
 
