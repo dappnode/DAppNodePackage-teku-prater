@@ -7,7 +7,7 @@ By downloading, accessing or using this DAppNode Package ("DNP"), you (reference
 ### About DAppNode
 
 DAppNode is Free Open Source Software ("FOSS") aimed at facilitating the use of decentralized technologies. DAppNode is developed by the DAppNode Association, a voluntary association with the purpose of empowering users to participate in decentralized networks and to help such networks become more resilient by promoting the deployment of more nodes.
-The modular structure of the DAppNode FOSS allows for the wrapping of 3rd party software with the intention of facilitating its deployment. In no way we are responsible for the misuse of such software and in no way we warrant its functionalities. We accept no responsibiity for its errors, or for the errors that the wrapping process might have introduced. Any usage of DAppNode and a DNP is strictly at your own risk.
+The modular structure of the DAppNode FOSS allows for the wrapping of 3rd party software with the intention of facilitating its deployment. In no way we are responsible for the misuse of such software and in no way we warrant its functionalities. We accept no responsibility for its errors, or for the errors that the wrapping process might have introduced. Any usage of DAppNode and a DNP is strictly at your own risk.
 
 ### About this DNP
 
@@ -37,7 +37,7 @@ Some Internet plans will charge an additional amount for any excess upload bandw
 
 ### Warranty Disclaimer
 
-DAPPNODE IS PROVIDED ON AN “AS-IS” BASIS AND MAY INCLUDE ERRORS, OMISSIONS, OR OTHER INACCURACIES. DAPPNODE ASSOCIATION AND ITS CONTRIBUTORS MAKE NO REPRESENTATIONS OR WARRANTIES ABOUT DAPNODDE FOR ANY PURPOSE, AND HEREBY EXPRESSLY DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT OR ANY OTHER IMPLIED WARRANTY UNDER THE UNIFORM COMPUTER INFORMATION TRANSACTIONS ACT AS ENACTED BY ANY STATE. WE ALSO MAKE NO REPRESENTATIONS OR WARRANTIES THAT DAPPNODE WILL OPERATE ERROR-FREE, UNINTERRUPTED, OR IN A MANNER THAT WILL MEET YOUR REQUIREMENTS AND/OR NEEDS. THEREFORE, YOU ASSUME THE ENTIRE RISK REGARDING THE QUALITY AND/OR PERFORMANCE OF DAPPNODE AND ANY TRANSACTIONS ENTERED INTO THEREON.
+DAPPNODE IS PROVIDED ON AN “AS-IS” BASIS AND MAY INCLUDE ERRORS, OMISSIONS, OR OTHER INACCURACIES. DAPPNODE ASSOCIATION AND ITS CONTRIBUTORS MAKE NO REPRESENTATIONS OR WARRANTIES ABOUT DAPPNODE FOR ANY PURPOSE, AND HEREBY EXPRESSLY DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT OR ANY OTHER IMPLIED WARRANTY UNDER THE UNIFORM COMPUTER INFORMATION TRANSACTIONS ACT AS ENACTED BY ANY STATE. WE ALSO MAKE NO REPRESENTATIONS OR WARRANTIES THAT DAPPNODE WILL OPERATE ERROR-FREE, UNINTERRUPTED, OR IN A MANNER THAT WILL MEET YOUR REQUIREMENTS AND/OR NEEDS. THEREFORE, YOU ASSUME THE ENTIRE RISK REGARDING THE QUALITY AND/OR PERFORMANCE OF DAPPNODE AND ANY TRANSACTIONS ENTERED INTO THEREON.
 
 ### Limitation of Liability
 
