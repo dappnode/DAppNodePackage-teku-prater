@@ -19,6 +19,8 @@ services:
       - "9505:9505/udp"
     restart: unless-stopped
     image: "beacon-chain.teku-prater.dnp.dappnode.eth:0.1.11"
+    security_opt:
+      - "seccomp:unconfined"
   validator:
     build:
       context: ./validator
@@ -34,5 +36,7 @@ services:
       FEE_RECIPIENT_ADDRESS: ""
     restart: unless-stopped
     image: "validator.teku-prater.dnp.dappnode.eth:0.1.11"
+    security_opt:
+      - "seccomp:unconfined"
 volumes:
   teku-prater-data: {}
