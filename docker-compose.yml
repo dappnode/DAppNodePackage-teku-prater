@@ -33,7 +33,6 @@ services:
       EXTRA_OPTS: ""
       EXIT_VALIDATOR: ""
       KEYSTORES_VOLUNTARY_EXIT: ""
-      FEE_RECIPIENT_ADDRESS: ""
     restart: unless-stopped
     image: "validator.teku-prater.dnp.dappnode.eth:0.1.11"
     security_opt:
