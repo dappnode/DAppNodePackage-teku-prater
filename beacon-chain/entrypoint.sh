@@ -27,12 +27,7 @@ esac
 if [ -n "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" ] && [ "$_DAPPNODE_GLOBAL_MEVBOOST_PRATER" == "true" ]; then
     echo "MEVBOOST is enabled"
     MEVBOOST_URL="http://mev-boost.mev-boost-goerli.dappnode:18550"
-    if wget --retry-connrefused --waitretry=5 --read-timeout=20 --timeout=15 -t 0 "${MEVBOOST_URL}"; then
-        EXTRA_OPTS="--builder-endpoint=${MEVBOOST_URL} ${EXTRA_OPTS}"
-    else
-        echo "MEVBOOST is enabled but ${MEVBOOST_URL} is not reachable"
-        wget -qO- --post-data="type=danger&title=${MEVBOOST_URL} is not available&body=Make sure the mevboost is available and running" http://my.dappnode/notification-send
-    fi
+    EXTRA_OPTS="--builder-endpoint=${MEVBOOST_URL} ${EXTRA_OPTS}"
 fi
 
 exec /opt/teku/bin/teku \
