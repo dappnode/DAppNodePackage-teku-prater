@@ -30,5 +30,5 @@ exec /opt/teku/bin/teku --log-destination=CONSOLE \
   --validator-api-keystore-file=/cert/teku_client_keystore.p12 \
   --validator-api-keystore-password-file=/cert/teku_keystore_password.txt \
   --validators-proposer-default-fee-recipient="${FEE_RECIPIENT_ADDRESS}" \
-  --logging=ALL \
+  --logging="${LOG_TYPE}" \
   ${EXTRA_OPTS}
