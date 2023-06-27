@@ -13,6 +13,5 @@ COPY entrypoint.sh /usr/bin/entrypoint.sh
 
 RUN apt-get update && apt-get install ca-certificates --yes 
 
-ENV JAVA_OPTS="-Xmx5g"
 
 ENTRYPOINT [ "entrypoint.sh" ]
