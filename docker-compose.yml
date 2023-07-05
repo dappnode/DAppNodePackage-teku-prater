@@ -12,6 +12,7 @@ services:
       P2P_PORT: 9505
       FEE_RECIPIENT_ADDRESS: ""
       EXTRA_OPTS: ""
+      JAVA_OPTS: "-Xmx6g"
     volumes:
       - "teku-prater-data:/opt/teku/data"
     ports:
@@ -34,6 +35,7 @@ services:
       EXIT_VALIDATOR: ""
       KEYSTORES_VOLUNTARY_EXIT: ""
       FEE_RECIPIENT_ADDRESS: ""
+      JAVA_OPTS: "-Xmx6g"
     restart: unless-stopped
     image: "validator.teku-prater.dnp.dappnode.eth:0.1.11"
     security_opt:

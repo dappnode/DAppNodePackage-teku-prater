@@ -15,7 +15,6 @@ RUN apt update && apt install wget --yes
 RUN mkdir -p /opt/teku/data
 RUN chown -R 1001:1001 /opt/teku/data
 
-ENV JAVA_OPTS="-Xmx5g"
 
 # API port: https://docs.teku.consensys.net/en/latest/Reference/CLI/CLI-Syntax/#rest-api-port
 EXPOSE $BEACON_API_PORT
