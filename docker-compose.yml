@@ -12,7 +12,7 @@ services:
       P2P_PORT: 9505
       FEE_RECIPIENT_ADDRESS: ""
       EXTRA_OPTS: ""
-      JAVA_OPTS: "-Xmx5g"
+      JAVA_OPTS: "-Xmx6g"
     volumes:
       - "teku-prater-data:/opt/teku/data"
     ports:
